@@ -21,7 +21,7 @@ jobs:
     - name: Lint with flake8
       run: flake8 .
       with:
-        - exclude: "tests"
+        - exclude: "tests/test_readme.py"
 
     - name: Test with pytest
       run: pytest tests.py
