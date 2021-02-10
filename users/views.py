@@ -29,7 +29,8 @@ def get_conf_code(request):
             from_email,
             [to_email],
         )
-        return Response(f'Вам был выслан код для регистрации на {email}', status=200)
+        return Response(f'Вам был выслан код для регистрации на {email}',
+                        status=200)
 
 
 @api_view(['POST'])
@@ -42,7 +43,8 @@ def get_token(request):
     if default_token_generator.check_token(user, code):
         access = AccessToken.for_user(user)
         refresh = RefreshToken.for_user(user)
-        return Response({'AccessToken': f'{access}', 'RefreshToken': f'{refresh}'}, status=200)
+        return Response({'AccessToken': f'{access}',
+                         'RefreshToken': f'{refresh}'}, status=200)
     return Response(status=400)
 
 
