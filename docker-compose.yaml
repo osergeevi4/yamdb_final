@@ -14,8 +14,8 @@ services:
   web:
     image: okodit/infra_sp2
     restart: always
-    ports:
-      - "8000:8000"
+    #ports:
+      #- "8000:8000"
     depends_on:
       - db
     env_file:
