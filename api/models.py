@@ -120,4 +120,3 @@ class Comments(models.Model):
         ordering = (
             '-pub_date',
         )
-
