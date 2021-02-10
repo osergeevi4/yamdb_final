@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       script: |
-        cd /home/ndvg/yamdb_final
+        cd /home/okodit/yamdb_final
         flake8 .
         pytest
   build:
@@ -26,7 +26,7 @@ jobs:
           uses: docker/build-push-action@v2
           with:
             push: true
-            tags: ndvg/yamdb_final:latest
+            tags: okodit/yamdb_final:latest
   deploy:
     runs-on: ubuntu-latest
     needs: build_and_push_to_docker_hub
