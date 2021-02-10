@@ -58,7 +58,7 @@ jobs:
         source: "docker-compose.yaml, nginx/default.conf"
         target: "~/app/"
         script: |
-          sudo docker pull okodit/flask-app
+          sudo docker pull okodit/yamdb_final
           sudo docker stop $(sudo docker ps -a -q)
           sudo docker run --rm -d -p 8000:8000 okodit/yamdb_final
   send_message:
