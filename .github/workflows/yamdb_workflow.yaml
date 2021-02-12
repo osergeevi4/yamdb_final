@@ -22,12 +22,10 @@ jobs:
         pip install flake8 pytest
         pip install -r requirements.txt
     - name: Lint with flake8
-      run: flake8 .
-      with:
-        - exclude: "tests"
+      run: flake8 . --exclude tests,api_yamdb/settings.py,api/urls.py
 
     - name: Test with pytest
-      run: pytest tests.py
+      run: pytest tests
 
   build_and_push_to_docker_hub:
     name: Push Docker image to Docker Hub
@@ -61,9 +59,14 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         passphrase: ${{ secrets.PASSPHRASE }}
         source: "docker-compose.yaml, nginx/default.conf"
-        target: "~/app/"
+        target: "~/code/"
         script: |
-          sudo docker pull okodit/yamdb_final:latest
+          sudo apt-get update -y
+          sudo apt-get remove docker docker-engine docker.io -y
+          sudo apt install docker.io -y
+          sudo systemctl start docker
+          sudo systemctl enable docker
+          sudo docker pull okodit/yamdb_final
           sudo docker stop $(sudo docker ps -a -q)
           sudo docker-compose up
   send_message:
@@ -76,4 +79,3 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: ${{ github.workflow }} успешно выполнен!
-
