@@ -67,7 +67,6 @@ jobs:
           sudo systemctl start docker
           sudo systemctl enable docker
           sudo docker pull okodit/yamdb_final
-          sudo docker stop $(sudo docker ps -a -q)
           sudo docker-compose up
   send_message:
     runs-on: ubuntu-latest
